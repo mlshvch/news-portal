@@ -2,25 +2,46 @@ class NewsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def index
-    @news = News.all
+    @articles = News.all
   end
 
   def show
-    @news = News.find(params[:id])
+    @article = News.find(params[:id])
   end
 
   def new
-    @news = News.new
+    @article = News.new
   end
 
   def create
-    @news = News.new(news_params)
+    @article = News.new(news_params)
 
     if @news.save
-      redirect_to @news
+      redirect_to @article
     else
       render new, status: :unprocessable_entity
     end
+  end
+
+  def edit
+    @article = News.find(params[:id])
+  end
+
+  def update
+    @article = News.find(params[:id])
+
+    if @article.update(news_params)
+      redirect_to @article
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    @article = News.find(params[:id])
+    @article.destroy
+
+    redirect_to root_path
   end
 
   private
