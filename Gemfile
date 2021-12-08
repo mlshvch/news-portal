@@ -34,8 +34,6 @@ group :development, :test do
   gem 'bullet', '~> 6.1.5'
   gem 'rubocop', '>= 1.2.3'
   gem 'pry', '~> 0.14.1'
-  gem 'simplecov', '~> 0.21.2'
-  gem 'reek', '~> 6.0.6'
   gem 'rake', '>= 13.0.1'
 end
 
@@ -48,6 +46,7 @@ group :development do
   gem 'listen', '~> 3.3'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  gem 'reek', '~> 6.0.6'
 end
 
 group :test do
@@ -56,6 +55,8 @@ group :test do
   gem 'selenium-webdriver'
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
+  gem 'simplecov', '~> 0.21.2'
+  gem 'rspec-rails', '~> 5.0', '>= 5.0.2'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
