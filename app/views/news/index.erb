@@ -1,0 +1,10 @@
+<h1>News#index</h1>
+<h2>
+    <% @news.each do |article| %>
+      <li>
+        <%= link_to article.title, article %>
+      </li>
+    <% end %>
+</h2>
+<%= link_to 'Create new article', new_news_path %>
+
