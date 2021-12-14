@@ -167,6 +167,27 @@ Rubocop должен проходить успешно, без offenses.
 
 ### Deploy
 
-В качестве рекомендуется использовать сервис Heroku (free tiers) - простой и удобный сервис для деплоя. 
+В качестве рекомендуется использовать сервис Heroku (free tiers) - простой и удобный сервис для деплоя.
 
+### Setup
 
+- Ruby ~> 3.0.2
+- PostgreSQL >= 12.9
+- Package Manager: RubyGems
+- Version Manager: RVM
+
+### First Time Setup
+
+1. open the directory with repository code
+2. `gem install bundler`
+3. `bundle install`
+4. `bin/rails db:create` or `bundle exec rake db:create`
+5. `bin/rails db:migrate` or `bundle exec rake db:migrate`
+
+### Running the application
+
+`bin/rails s`
+
+### Project Management
+
+https://trello.com/b/mJAptowE/news-portal
