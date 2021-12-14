@@ -176,12 +176,17 @@ Rubocop должен проходить успешно, без offenses.
 - Package Manager: RubyGems
 - Version Manager: RVM
 
-### To start program:
+### First Time Setup
 
-1. Open Terminal
-2. `cd project_dir`
+1. open the directory with repository code
+2. `gem install bundler`
 3. `bundle install`
-4. `bin/rails s`
+4. `bin/rails db:create` or `bundle exec rake db:create`
+5. `bin/rails db:migrate` or `bundle exec rake db:migrate`
+
+### Running the application
+
+`bin/rails s`
 
 ### Project Management
 
