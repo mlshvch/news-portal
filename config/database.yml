@@ -20,13 +20,13 @@ default: &default
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: 'mlshvch'
-  password: ',f3flfyys['
+  username: <%= Rails.application.credentials.dig(:pg, :username) %>
+  password: <%= Rails.application.credentials.dig(:password) %>
 
 development:
   <<: *default
   database: news_portal_development
-
+  
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
   # When left blank, postgres will use the default role. This is
