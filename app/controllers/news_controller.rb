@@ -16,10 +16,10 @@ class NewsController < ApplicationController
   def create
     @article = News.new(news_params)
 
-    if @news.save
+    if @article.save
       redirect_to @article
     else
-      render new, status: :unprocessable_entity
+      render :new, status: :unprocessable_entity
     end
   end
 
