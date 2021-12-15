@@ -1,24 +1,19 @@
 class NewsController < ApplicationController
   # skip_before_action :verify_authenticity_token
+  before_action :find_article, except: [:index, :find_article, :news_params]
 
   def index
     @articles = News.all
   end
 
-  def show!
-    find_article
+  def show
     # if article nil then redirect to the main page
-    unless @article 
-      flash[:notice] = "Article not found"
-      redirect_to root_path
-    end
   end
 
   def new
-    @article = News.new
   end
 
-  def create!
+  def create
     @article = News.new(news_params)
 
     if @article.save
@@ -28,13 +23,10 @@ class NewsController < ApplicationController
     end
   end
 
-  def edit!
-    find_article
+  def edit
   end
 
-  def update!
-    find
-
+  def update
     if @article.update(news_params)
       redirect_to @article
     else
@@ -42,8 +34,7 @@ class NewsController < ApplicationController
     end
   end
 
-  def destroy!
-    find_article
+  def destroy
     @article.destroy
 
     redirect_to root_path
@@ -52,7 +43,12 @@ class NewsController < ApplicationController
   private
 
   def find_article 
-    @article = News.find(params[:id])
+    @article = News.find_by(id: params[:id])
+
+    unless @article 
+      flash[:notice] = "Article not found"
+      redirect_to root_path
+    end
   end
 
   def news_params
