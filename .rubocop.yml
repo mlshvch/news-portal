@@ -1,0 +1,18 @@
+AllCops:
+  NewCops: enable
+  Exclude:
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'script/**/*'
+    - 'bin/**/*'
+    - 'Gemfile'
+    - 'Gemfile.log'
+    - 'config.ru'
+    - 'spec/**/*'
+
+
+Style/Documentation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
