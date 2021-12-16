@@ -1,6 +1,6 @@
-class CreateNews < ActiveRecord::Migration[6.1]
+class CreateNewsArticles < ActiveRecord::Migration[6.1]
   def change
-    create_table :news do |t|
+    create_table :news_articles do |t|
       t.string :title, null: false
       t.text :body, null: false
 

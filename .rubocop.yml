@@ -9,6 +9,7 @@ AllCops:
     - 'Gemfile.log'
     - 'config.ru'
     - 'spec/**/*'
+    - 'test/**/*'
 
 
 Style/Documentation:
