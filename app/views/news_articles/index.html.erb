@@ -28,6 +28,4 @@
 
 <%= link_to 'New News Article', new_news_article_path %>
 
-<% if flash[:notice] %>
-  <p style="color: #ff0000"><%= flash[:notice] %> </p>
-<%end%>
+<%= render 'error', full: true %>
