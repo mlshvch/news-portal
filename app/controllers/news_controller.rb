@@ -1,16 +1,17 @@
+# frozen_string_literal:true
+
 class NewsController < ApplicationController
   # skip_before_action :verify_authenticity_token
-  before_action :find_article, except: [:index, :find_article, :news_params]
+  before_action :find_article, except: %i[index new create]
 
   def index
     @articles = News.all
   end
 
-  def show
-    # if article nil then redirect to the main page
-  end
+  def show; end
 
   def new
+    @article = News.new
   end
 
   def create
@@ -23,8 +24,7 @@ class NewsController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @article.update(news_params)
@@ -42,17 +42,16 @@ class NewsController < ApplicationController
 
   private
 
-  def find_article 
+  def find_article
     @article = News.find_by(id: params[:id])
 
-    unless @article 
-      flash[:notice] = "Article not found"
-      redirect_to root_path
-    end
+    return if @article
+
+    flash[:notice] = 'Article not found'
+    redirect_to root_path
   end
 
   def news_params
     params.require(:news).permit(:title, :body)
   end
-
 end
