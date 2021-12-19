@@ -1,5 +1,4 @@
 class NewsArticlesController < ApplicationController
-  skip_before_action :verify_authenticity_token
   before_action :set_news_article, only: %i[show edit update destroy]
 
   # GET /news_articles or /news_articles.json
