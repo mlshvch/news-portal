@@ -1,0 +1,12 @@
+AllCops:
+  NewCops: enable
+  Include:
+    - 'app/**/*.rb'
+    - 'config/**/*.rb'
+    - 'spec/**/*.rb'
+    - 'lib/**/*.rb'
+    - '**/*.gemfile'
+    - '**/*.rake'
+
+Style/Documentation:
+  Enabled: false
