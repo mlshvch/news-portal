@@ -1,0 +1,2 @@
+class NewsArticlePolicy < ApplicationPolicy
+end
