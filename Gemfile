@@ -36,6 +36,7 @@ group :development, :test do
   gem 'pry-rails', '~> 0.3.9'
   gem 'rake', '>= 13.0.1'
   gem 'devise', '~> 4.8'
+  gem 'pundit', '~> 2.1', '>= 2.1.1'
 end
 
 group :development do
