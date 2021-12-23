@@ -1,5 +1,6 @@
 class NewsArticlesController < ApplicationController
-  before_action :set_news_article, only: %i[show edit update destroy], :authenticate_user!
+  before_action :set_news_article, only: %i[show edit update destroy]
+  before_action :authenticate_user!
 
   # GET /news_articles
   def index
