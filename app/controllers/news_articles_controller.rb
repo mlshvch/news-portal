@@ -4,6 +4,7 @@ class NewsArticlesController < ApplicationController
   # GET /news_articles
   def index
     @news_articles = NewsArticle.all
+    authorize @news_articles
   end
 
   # GET /news_articles/1
@@ -13,15 +14,17 @@ class NewsArticlesController < ApplicationController
   # GET /news_articles/new
   def new
     @news_article = NewsArticle.new
+    authorize @news_article
   end
 
   # GET /news_articles/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /news_articles
   def create
     @news_article = NewsArticle.new(news_article_params)
+    @news_article.user = current_user 
+    @authorize @news_article
 
     respond_to do |format|
       if @news_article.save
