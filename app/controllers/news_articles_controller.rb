@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
 class NewsArticlesController < ApplicationController
-  before_action :set_news_article, only: %i[show edit update destroy], :authenticate_user!
+  before_action :set_news_article, only: %i[show edit update destroy]
+  before_action :authenticate_user!
 
   # GET /news_articles
   def index
@@ -8,8 +11,7 @@ class NewsArticlesController < ApplicationController
   end
 
   # GET /news_articles/1
-  def show
-  end
+  def show; end
 
   # GET /news_articles/new
   def new
@@ -23,12 +25,12 @@ class NewsArticlesController < ApplicationController
   # POST /news_articles
   def create
     @news_article = NewsArticle.new(news_article_params)
-    @news_article.user = current_user 
-    @authorize @news_article
+    @news_article.user = current_user
+    authorize @news_article
 
     respond_to do |format|
       if @news_article.save
-        format.html { redirect_to @news_article, notice: "News article was successfully created." }
+        format.html { redirect_to @news_article, notice: 'News article was successfully created.' }
       else
         format.html { render :new, status: :unprocessable_entity }
       end
@@ -39,7 +41,7 @@ class NewsArticlesController < ApplicationController
   def update
     respond_to do |format|
       if @news_article.update(news_article_params)
-        format.html { redirect_to @news_article, notice: "News article was successfully updated." }
+        format.html { redirect_to @news_article, notice: 'News article was successfully updated.' }
       else
         format.html { render :edit, status: :unprocessable_entity }
       end
@@ -50,7 +52,7 @@ class NewsArticlesController < ApplicationController
   def destroy
     @news_article.destroy
     respond_to do |format|
-      format.html { redirect_to news_articles_url, notice: "News article was successfully destroyed." }
+      format.html { redirect_to news_articles_url, notice: 'News article was successfully destroyed.' }
     end
   end
 
