@@ -25,8 +25,8 @@ class NewsArticlesController < ApplicationController
   # POST /news_articles
   def create
     @news_article = NewsArticle.new(news_article_params)
-    @news_article.user = current_user
     authorize @news_article
+    @news_article.user = current_user
 
     respond_to do |format|
       if @news_article.save
@@ -41,6 +41,7 @@ class NewsArticlesController < ApplicationController
   def update
     respond_to do |format|
       if @news_article.update(news_article_params)
+        authorize @news_article
         format.html { redirect_to @news_article, notice: 'News article was successfully updated.' }
       else
         format.html { render :edit, status: :unprocessable_entity }
