@@ -42,6 +42,7 @@ class NewsArticlesController < ApplicationController
     respond_to do |format|
       if @news_article.update(news_article_params)
         authorize @news_article
+
         format.html { redirect_to @news_article, notice: 'News article was successfully updated.' }
       else
         format.html { render :edit, status: :unprocessable_entity }
