@@ -33,8 +33,8 @@ class NewsArticlePolicy < ApplicationPolicy
 
     attr_reader :user, :scope
 
-    def update?
-      user.admin? or !record.published?
+    def resolve
+      scope.all inless user.reader?
     end
   end
 end
