@@ -1,0 +1,75 @@
+---
+
+name: Tests
+
+on:
+  pull_request:
+    branches: ['main']
+
+jobs:
+  rspec:
+    strategy:
+        matrix:
+          os: [ubuntu-latest]
+          ruby: [3.0.2]
+    runs-on: ${{ matrix.os }}
+    env:
+      RAILS_ENV: test
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: news_portal_test
+    services:
+      postgres:
+        image: postgres:13.5
+        env:
+          POSTGRES_USER: ${{ env.POSTGRES_USER }}
+          POSTGRES_PASSWORD: ${{ env.POSTGRES_PASSWORD }}
+          POSTGRES_DB: ${{ env.POSTGRES_DB }}
+        ports:
+        - 5432:5432
+        options: >-
+          --mount type=tmpfs,destination=/var/lib/postgresql/data
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ${{ matrix.ruby }}
+        bundler-cache: true
+    - uses: actions/setup-node@v2
+      with:
+        node-version: '17.3.0'
+        registry-url: 'https://registry.npmjs.org'
+    - name: Install Yarn
+      run: npm install -g yarn
+    - name: Set Yarn cache dir
+      id: yarn-cache-dir-path
+      run: echo "::set-output name=dir::$(yarn cache dir)"
+    - uses: actions/cache@v2
+      with:
+        path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+        key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-yarn-
+    - name: Yarn install
+      run: yarn install
+    - name: Setup DB
+      env:
+        PGHOST: localhost
+        PGUSER: ${{ env.POSTGRES_USER }}
+        PGPASSWORD: ${{ env.POSTGRES_PASSWORD }}
+        PGPORT: ${{ job.services.postgres.ports[5432] }}
+      run: bundle exec rails db:setup
+    - name: Run tests
+      env:
+        PGHOST: localhost
+        PGUSER: ${{ env.POSTGRES_USER }}
+        PGPASSWORD: ${{ env.POSTGRES_PASSWORD }}
+        PGPORT: ${{ job.services.postgres.ports[5432] }}
+      run: bundle exec rspec
+
+...
