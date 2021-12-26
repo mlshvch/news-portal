@@ -10,3 +10,10 @@ AllCops:
 
 Style/Documentation:
   Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: true
+
+Layout/LineLength:
+  Enabled: true
+  Max: 120
