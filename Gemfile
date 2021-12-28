@@ -36,6 +36,7 @@ group :development, :test do
   gem 'pry-rails', '~> 0.3.9'
   gem 'rake', '>= 13.0.1'
   gem 'devise', '~> 4.8'
+  gem 'rspec-rails', '~> 5.0', '>= 5.0.2'
 end
 
 group :development do
@@ -57,7 +58,6 @@ group :test do
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
   gem 'simplecov', '~> 0.21.2'
-  gem 'rspec-rails', '~> 5.0', '>= 5.0.2'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
