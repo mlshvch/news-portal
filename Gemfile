@@ -37,6 +37,7 @@ group :development, :test do
   gem 'rake', '>= 13.0.1'
   gem 'devise', '~> 4.8'
   gem 'pundit', '~> 2.1', '>= 2.1.1'
+  gem 'rolify', '~> 5.2'
   gem 'rspec-rails', '~> 5.0', '>= 5.0.2'
 end
 
