@@ -6,8 +6,8 @@ class NewsArticlesController < ApplicationController
 
   # GET /news_articles
   def index
-    @news_articles = NewsArticle.all
     authorize @news_articles
+    @news_articles = NewsArticle.all
   end
 
   # GET /news_articles/1
@@ -15,8 +15,8 @@ class NewsArticlesController < ApplicationController
 
   # GET /news_articles/new
   def new
-    @news_article = NewsArticle.new
     authorize @news_article
+    @news_article = NewsArticle.new
   end
 
   # GET /news_articles/1/edit
@@ -24,8 +24,8 @@ class NewsArticlesController < ApplicationController
 
   # POST /news_articles
   def create
-    @news_article = NewsArticle.new(news_article_params)
     authorize @news_article
+    @news_article = NewsArticle.new(news_article_params)
     @news_article.user = current_user
 
     respond_to do |format|
