@@ -58,6 +58,8 @@ group :test do
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
   gem 'simplecov', '~> 0.21.2'
+  # Generating fake data for testing
+  gem 'factory_bot', '~> 6.2'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
