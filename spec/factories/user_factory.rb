@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-# user.rb
-
 FactoryBot.define do
   factory :user do
     email { 'abcdef@example.com' }
