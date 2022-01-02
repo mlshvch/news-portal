@@ -14,7 +14,7 @@ RSpec.describe NewsArticlesController, type: :controller do
     context 'when user logged-in' do
       login_user
       it 'has a current_user' do
-        # NOTE: the fact that you should remove the "validate_session" parameter if this was a scaffold-generated controller
+        # NOTE: you should remove the "validate_session" parameter if this was a scaffold-generated controller
         expect(subject.current_user).to_not eq(nil)
       end
 
