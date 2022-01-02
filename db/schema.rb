@@ -20,8 +20,6 @@ ActiveRecord::Schema.define(version: 2021_12_30_165605) do
     t.text "body", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "user_id", null: false
-    t.index ["user_id"], name: "index_news_articles_on_user_id"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -49,6 +47,7 @@ ActiveRecord::Schema.define(version: 2021_12_30_165605) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+<<<<<<< HEAD
   create_table "users_roles", id: false, force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "role_id"
@@ -58,4 +57,6 @@ ActiveRecord::Schema.define(version: 2021_12_30_165605) do
   end
 
   add_foreign_key "news_articles", "users"
+=======
+>>>>>>> main
 end
