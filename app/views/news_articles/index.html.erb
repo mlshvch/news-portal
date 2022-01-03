@@ -1,7 +1,6 @@
 <h1>News Articles</h1>
 
 <%= render 'error' %>
-<%= current_user.id if user_signed_in? %>
 
 <% if policy(@news_articles).index? %>
   <table>
@@ -19,9 +18,9 @@
         <td><%= news_article.body %></td>
         <td><%= news_article.user_id %></td>
         <td><%= link_to 'Show', news_article %></td>
-        <% if policy(news_article).update? %>>
+        <% if policy(news_article).update? %>
           <td><%= link_to 'Edit', edit_news_article_path(news_article) %></td>
-        <% end %>>
+        <% end %>
         <% if policy(news_article).destroy? %>
 
           <td><%= link_to 'Destroy', news_article, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -34,7 +33,7 @@
 <br>
 <% if user_signed_in? %>
   <p><%= link_to 'New News Article', new_news_article_path %></p>
-  <p><%= link_to 'Log out', destroy_user_session_path, :method => :delete %></p>
+  <p><%= link_to 'Log out', destroy_user_session_path, method: :delete %></p>
 <% else %>
   <p><%= link_to 'Sign in', new_user_session_url %></p>
 <% end %>

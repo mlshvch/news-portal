@@ -1,6 +1,7 @@
 <h1>Editing News Article</h1>
-
+<% if policy(@news_article).edit? %>
 <%= render 'form', news_article: @news_article %>
 
-<%= link_to 'Show', @news_article %> |
+<%= link_to 'Show', @news_article %>
+<% end %>
 <%= link_to 'Back', news_articles_path %>
