@@ -6,7 +6,7 @@ class NewsArticlesController < ApplicationController
 
   # GET /news_articles
   def index
-    @news_articles = NewsArticle.all
+    @news_articles = policy_scope(NewsArticle.all)
   end
 
   # GET /news_articles/1
@@ -14,7 +14,6 @@ class NewsArticlesController < ApplicationController
 
   # GET /news_articles/new
   def new
-    authorize @news_article
     @news_article = NewsArticle.new
   end
 
@@ -23,8 +22,8 @@ class NewsArticlesController < ApplicationController
 
   # POST /news_articles
   def create
-    authorize @news_article
-    @news_article = NewsArticle.new(news_article_params)
+    authorize NewsArticle.new
+    @news_article = policy_scope(NewsArticle).new(news_article_params)
     @news_article.user = current_user
 
     respond_to do |format|
@@ -51,7 +50,7 @@ class NewsArticlesController < ApplicationController
 
   # DELETE /news_articles/1
   def destroy
-    @news_article.destroy
+    policy_scope(@news_article).destroy
     respond_to do |format|
       format.html { redirect_to news_articles_url, notice: 'News article was successfully destroyed.' }
     end

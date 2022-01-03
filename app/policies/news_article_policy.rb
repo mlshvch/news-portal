@@ -6,15 +6,15 @@ class NewsArticlePolicy < ApplicationPolicy
   end
 
   def create?
-    user.present?
+    user.present? && user.has_any_role?(:admin, :correspondent, :editor)
   end
 
   def update?
-    return true if user.present?
+    create? && ((user.has_role?(:correspondent) && (record.user_id == user.id)) || user.has_any_role?(:editor, :admin))
   end
 
   def destroy?
-    return true if user.present?
+    update?
   end
 
   private
@@ -25,16 +25,16 @@ class NewsArticlePolicy < ApplicationPolicy
 
   class Scope
     def initialize(user, scope)
-      @user  = user
+      @user = user
       @scope = scope
+    end
+
+    def resolve
+      scope.all if user.present?
     end
 
     private
 
     attr_reader :user, :scope
-
-    def resolve
-      scope.all if user.present?
-    end
   end
 end
