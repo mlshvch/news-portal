@@ -62,6 +62,7 @@ group :test do
   gem 'simplecov', '~> 0.21.2'
   # Generating fake data for testing
   gem 'factory_bot_rails', '~> 5.0', '>= 5.0.2'
+  gem 'faker', '~> 2.19'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
