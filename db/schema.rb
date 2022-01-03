@@ -20,6 +20,8 @@ ActiveRecord::Schema.define(version: 2021_12_30_165605) do
     t.text "body", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_news_articles_on_user_id"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -42,7 +44,6 @@ ActiveRecord::Schema.define(version: 2021_12_30_165605) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string "unconfirmed_email"
-    t.integer "role"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

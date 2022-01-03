@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :user do
-    email { 'abcdef@example.com' }
+    email { Faker::Internet.email }
     password { 'rubyonrails' }
     password_confirmation { 'rubyonrails' }
     confirmed_at { Time.now }
