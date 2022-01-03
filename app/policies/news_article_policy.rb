@@ -34,7 +34,7 @@ class NewsArticlePolicy < ApplicationPolicy
     attr_reader :user, :scope
 
     def resolve
-      scope.all unless user.reader?
+      scope.all if user.present?
     end
   end
 end

@@ -2,11 +2,10 @@
 
 class NewsArticlesController < ApplicationController
   before_action :set_news_article, only: %i[show edit update destroy]
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: :index
 
   # GET /news_articles
   def index
-    authorize @news_articles
     @news_articles = NewsArticle.all
   end
 
