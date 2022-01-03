@@ -14,7 +14,7 @@ class NewsArticlePolicy < ApplicationPolicy
   end
 
   def destroy?
-    update?
+    create? && ((user.has_role?(:correspondent) && (record.user_id == user.id)) || user.has_any_role?(:editor, :admin))
   end
 
   private

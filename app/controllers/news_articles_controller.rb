@@ -50,7 +50,7 @@ class NewsArticlesController < ApplicationController
 
   # DELETE /news_articles/1
   def destroy
-    policy_scope(@news_article).destroy
+    policy_scope(NewsArticle).find(params[:id]).destroy
     respond_to do |format|
       format.html { redirect_to news_articles_url, notice: 'News article was successfully destroyed.' }
     end
