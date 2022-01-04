@@ -24,5 +24,6 @@ Layout/LineLength:
 
 Metrics/BlockLength:
   Enabled: true
-  Exclude: 
-  - 'config/environments/*.rb'
+  Exclude:
+    - 'config/environments/*.rb'
+    - 'spec/**/*.rb'
