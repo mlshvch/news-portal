@@ -14,5 +14,4 @@ class ApplicationController < ActionController::Base
     flash[:alert] = 'You are not authorized to perform this action'
     redirect_to news_articles_path
   end
-
 end

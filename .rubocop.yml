@@ -7,6 +7,8 @@ AllCops:
     - 'lib/**/*.rb'
     - '**/*.gemfile'
     - '**/*.rake'
+  Exclude:
+    - bin/**
 
 Style/Documentation:
   Enabled: false
@@ -17,3 +19,11 @@ Style/FrozenStringLiteralComment:
 Layout/LineLength:
   Enabled: true
   Max: 120
+  Exclude: 
+   - 'config/**/*.rb'
+
+Metrics/BlockLength:
+  Enabled: true
+  Exclude:
+    - 'config/environments/*.rb'
+    - 'spec/**/*.rb'

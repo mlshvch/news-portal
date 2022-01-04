@@ -90,7 +90,6 @@ RSpec.describe NewsArticlesController, type: :controller do
       { id: news_article_id, title: Faker::Educator.university, body: Faker::Educator.degree }
     end
 
-
     it 'can create news article' do
       post :create, params: { news_article: params }
       expect(subject).to redirect_to action: :show, id: news_article_id
