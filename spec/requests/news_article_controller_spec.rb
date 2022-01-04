@@ -8,12 +8,12 @@ RSpec.describe NewsArticlesController, type: :controller do
     login_user
     before(:each) { subject.current_user.add_role(:admin) }
     let(:params) do
-      { title: Faker::String.random(length: 10), body: Faker::String.random(length: 10..20),
+      { title: Faker::Educator.university, body: Faker::Educator.degree,
         user: subject.current_user }
     end
     let(:news_article_id) { NewsArticle.where(user_id: subject.current_user.id).last.id }
     let(:update_params) do
-      { id: news_article_id, title: Faker::String.random(length: 10), body: Faker::String.random(length: 10..20) }
+      { id: news_article_id, title: Faker::Educator.university, body: Faker::Educator.degree }
     end
 
     it 'can create news article' do
@@ -40,13 +40,14 @@ RSpec.describe NewsArticlesController, type: :controller do
   context 'reader' do
     login_user
     let(:params) do
-      { title: Faker::String.random(length: 10), body: Faker::String.random(length: 10..20),
+      { title: Faker::Educator.university, body: Faker::Educator.degree,
         user: subject.current_user }
     end
     let(:news_article_id) { NewsArticle.where(user_id: subject.current_user.id).last.id }
     let(:update_params) do
-      { id: news_article_id, title: Faker::String.random(length: 10), body: Faker::String.random(length: 10..20) }
+      { id: news_article_id, title: Faker::Educator.university, body: Faker::Educator.degree }
     end
+
     it 'is not allowed to create news article' do
       post :create, params: { news_article: params }
       expect(response).to have_http_status(302)
@@ -81,13 +82,14 @@ RSpec.describe NewsArticlesController, type: :controller do
     let(:fake_news_article_id) { NewsArticle.where(user_id: @fake_user_id).last.id }
 
     let(:params) do
-      { title: Faker::String.random(length: 10), body: Faker::String.random(length: 10..20),
+      { title: Faker::Educator.university, body: Faker::Educator.degree,
         user: subject.current_user }
     end
     let(:news_article_id) { NewsArticle.where(user_id: subject.current_user.id).last.id }
     let(:update_params) do
-      { id: news_article_id, title: Faker::String.random(length: 10), body: Faker::String.random(length: 10..20) }
+      { id: news_article_id, title: Faker::Educator.university, body: Faker::Educator.degree }
     end
+
 
     it 'can create news article' do
       post :create, params: { news_article: params }
