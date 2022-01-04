@@ -74,7 +74,7 @@ RSpec.describe NewsArticlesController, type: :controller do
     before(:each) do
       user = FactoryBot.create(:user)
       user.save
-      NewsArticle.new(title: Faker::String.random(length: 10), body: Faker::String.random(length: 10..20),
+      NewsArticle.new(title: Faker::Educator.university, body: Faker::Educator.degree,
                       user: user).save!
       @fake_user_id = user.id
       subject.current_user.add_role(:correspondent)

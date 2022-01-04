@@ -22,9 +22,9 @@ class NewsArticlesController < ApplicationController
 
   # POST /news_articles
   def create
-    authorize NewsArticle.new
-    @news_article = policy_scope(NewsArticle).new(news_article_params)
+    @news_article = NewsArticle.new(news_article_params)
     @news_article.user = current_user
+    authorize @news_article
 
     respond_to do |format|
       if @news_article.save
@@ -37,10 +37,9 @@ class NewsArticlesController < ApplicationController
 
   # PATCH/PUT /news_articles/1
   def update
+    authorize @news_article
     respond_to do |format|
       if @news_article.update(news_article_params)
-        authorize @news_article
-
         format.html { redirect_to @news_article, notice: 'News article was successfully updated.' }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -50,7 +49,8 @@ class NewsArticlesController < ApplicationController
 
   # DELETE /news_articles/1
   def destroy
-    policy_scope(NewsArticle).find(params[:id]).destroy
+    authorize @news_article
+    @news_article.destroy!
     respond_to do |format|
       format.html { redirect_to news_articles_url, notice: 'News article was successfully destroyed.' }
     end
