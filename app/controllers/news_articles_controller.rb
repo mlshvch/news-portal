@@ -2,11 +2,11 @@
 
 class NewsArticlesController < ApplicationController
   before_action :set_news_article, only: %i[show edit update destroy]
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: :index
 
   # GET /news_articles
   def index
-    @news_articles = NewsArticle.all
+    @news_articles = policy_scope(NewsArticle.all)
   end
 
   # GET /news_articles/1
@@ -23,6 +23,8 @@ class NewsArticlesController < ApplicationController
   # POST /news_articles
   def create
     @news_article = NewsArticle.new(news_article_params)
+    @news_article.user = current_user
+    authorize @news_article
 
     respond_to do |format|
       if @news_article.save
@@ -35,6 +37,7 @@ class NewsArticlesController < ApplicationController
 
   # PATCH/PUT /news_articles/1
   def update
+    authorize @news_article
     respond_to do |format|
       if @news_article.update(news_article_params)
         format.html { redirect_to @news_article, notice: 'News article was successfully updated.' }
@@ -46,7 +49,8 @@ class NewsArticlesController < ApplicationController
 
   # DELETE /news_articles/1
   def destroy
-    @news_article.destroy
+    authorize @news_article
+    @news_article.destroy!
     respond_to do |format|
       format.html { redirect_to news_articles_url, notice: 'News article was successfully destroyed.' }
     end

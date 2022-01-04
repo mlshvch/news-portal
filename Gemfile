@@ -36,6 +36,8 @@ group :development, :test do
   gem 'pry-rails', '~> 0.3.9'
   gem 'rake', '>= 13.0.1'
   gem 'devise', '~> 4.8'
+  gem 'pundit', '~> 2.1', '>= 2.1.1'
+  gem 'rolify', '~> 5.2'
   gem 'rspec-rails', '~> 5.0', '>= 5.0.2'
 end
 
@@ -60,6 +62,7 @@ group :test do
   gem 'simplecov', '~> 0.21.2'
   # Generating fake data for testing
   gem 'factory_bot_rails', '~> 5.0', '>= 5.0.2'
+  gem 'faker', '~> 2.19'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
