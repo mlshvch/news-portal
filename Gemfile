@@ -30,6 +30,7 @@ gem 'bootsnap', '>= 1.4.4', require: false
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'aasm', '~> 4.11'
   gem 'bullet', '~> 6.1.5'
   gem 'rubocop', '>= 1.2.3'
   gem 'pry', '~> 0.14.1'
