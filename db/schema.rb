@@ -59,4 +59,5 @@ ActiveRecord::Schema.define(version: 2022_01_06_153912) do
     t.index ["user_id"], name: "index_users_roles_on_user_id"
   end
 
+  add_foreign_key "news_articles", "users"
 end
