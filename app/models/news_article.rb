@@ -5,7 +5,8 @@ class NewsArticle < ApplicationRecord
   belongs_to :user
   validates :title, presence: true
   validates :body, presence: true, length: { minimum: 10 }
-  validates :description, presence: true, length: { minimum: 10, maximum: 200 }
+  has_one_attached :main_image, dependent: :destroy
+  validates :main_image, presence: true
 
   enum state: %i[not_active active published archived]
 
