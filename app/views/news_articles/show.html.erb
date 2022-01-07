@@ -5,6 +5,12 @@
   <%= @news_article.title %>
 </p>
 
+<p>
+  <strong>Created at:</strong>
+  <%= @news_article.created_at %>
+</p>
+
+
 <%= image_tag @news_article.main_image, style: "height: auto; width: 70%" %>
 
 <% unless (@news_article.access_rights = :only_title) %>
