@@ -14,7 +14,7 @@
     </tr>
     </thead>
     <tbody>
-    <% @news_articles.each do |news_article| %>
+    <% @news_articles.includes([:rich_text_body]).each do |news_article| %>
       <tr>
         <td><%= news_article.title %></td>
         <% unless (news_article.access_rights = :only_title) %>

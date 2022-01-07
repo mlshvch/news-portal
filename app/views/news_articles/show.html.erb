@@ -10,10 +10,20 @@
   <%= @news_article.created_at %>
 </p>
 
+<p>
+  <strong>State:</strong>
+  <%= @news_article.state %>
+</p>
+
+<p>
+  <strong>Access:</strong>
+  <%= @news_article.access_rights %>
+</p>
+
 
 <%= image_tag @news_article.main_image, style: "height: auto; width: 70%" %>
 
-<% unless (@news_article.access_rights = :only_title) %>
+<% unless @news_article.access_rights == 'only_title' %>
   <p>
     <strong>Body:</strong>
     <%= @news_article.body %>

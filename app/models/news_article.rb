@@ -4,9 +4,10 @@ class NewsArticle < ApplicationRecord
   resourcify
   belongs_to :user
   validates :title, presence: true
-  validates :body, presence: true, length: { minimum: 10 }
   has_one_attached :main_image, dependent: :destroy
   validates :main_image, presence: true
+  has_rich_text :body
+  validates :body, presence: true, length: { minimum: 10 }
 
   enum state: %i[not_active active published archived]
   enum access_rights: %i[only_for_registered title_and_annotation only_title avaliable_for_everyone]
