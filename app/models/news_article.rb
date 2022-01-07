@@ -9,6 +9,7 @@ class NewsArticle < ApplicationRecord
   enum state: %i[not_active active published archived]
 
   include AASM
+  include NewsArticleMethods
 
   aasm column: :state, enum: true do
     state :not_active, initial: true
