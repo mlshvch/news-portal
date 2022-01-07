@@ -6,11 +6,16 @@
 </p>
 
 <%= image_tag @news_article.main_image, style: "height: auto; width: 70%" %>
-<p>
-  <strong>Body:</strong>
-  <%= @news_article.body %>
-</p>
-<% if policy(@news_article).edit? %>
-<%= link_to 'Edit', edit_news_article_path(@news_article) %>
+
+<% unless (@news_article.access_rights = :only_title) %>
+  <p>
+    <strong>Body:</strong>
+    <%= @news_article.body %>
+  </p>
 <% end %>
-<%= link_to 'Back', news_articles_path %>
+<p>
+  <% if policy(@news_article).edit? %>
+    <%= link_to 'Edit', edit_news_article_path(@news_article) %>
+  <% end %>
+  <%= link_to 'Back', news_articles_path %>
+</p>

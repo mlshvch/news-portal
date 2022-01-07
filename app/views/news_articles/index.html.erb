@@ -15,25 +15,29 @@
     <% @news_articles.each do |news_article| %>
       <tr>
         <td><%= news_article.title %></td>
-        <td><%= news_article.body %></td>
-        <td><%= news_article.user_id %></td>
-        <td><%= link_to 'Show', news_article %></td>
-        <% if policy(news_article).update? %>
-          <td><%= link_to 'Edit', edit_news_article_path(news_article) %></td>
+        <% unless (news_article.access_rights = :only_title) %>
+          <td><%= news_article.description %></td>
         <% end %>
-        <% if policy(news_article).destroy? %>
+          <td><%= news_article.body %></td>
+          <% %>
+          <td><%= news_article.user_id %></td>
+          <td><%= link_to 'Show', news_article %></td>
+          <% if policy(news_article).update? %>
+            <td><%= link_to 'Edit', edit_news_article_path(news_article) %></td>
+          <% end %>
+          <% if policy(news_article).destroy? %>
 
-          <td><%= link_to 'Destroy', news_article, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <td><%= link_to 'Destroy', news_article, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <% end %>
+          </tr>
         <% end %>
-      </tr>
+        </tbody>
+        </table>
     <% end %>
-    </tbody>
-  </table>
-<% end %>
-<br>
-<% if user_signed_in? %>
-  <p><%= link_to 'New News Article', new_news_article_path %></p>
-  <p><%= link_to 'Log out', destroy_user_session_path, method: :delete %></p>
-<% else %>
-  <p><%= link_to 'Sign in', new_user_session_url %></p>
-<% end %>
+    <br>
+    <% if user_signed_in? %>
+      <p><%= link_to 'New News Article', new_news_article_path %></p>
+      <p><%= link_to 'Log out', destroy_user_session_path, method: :delete %></p>
+    <% else %>
+      <p><%= link_to 'Sign in', new_user_session_url %></p>
+    <% end %>

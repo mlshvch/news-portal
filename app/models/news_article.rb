@@ -9,6 +9,7 @@ class NewsArticle < ApplicationRecord
   validates :main_image, presence: true
 
   enum state: %i[not_active active published archived]
+  enum access_rights: %i[only_for_registered title_and_annotation only_title avaliable_for_everyone]
 
   include AASM
   include NewsArticleMethods
