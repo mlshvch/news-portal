@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_07_215731) do
+ActiveRecord::Schema.define(version: 2022_01_08_070734) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 2022_01_07_215731) do
     t.bigint "user_id"
     t.text "description"
     t.integer "access_rights", default: 0, null: false
+    t.datetime "published_at"
     t.index ["user_id"], name: "index_news_articles_on_user_id"
   end
 

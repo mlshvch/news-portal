@@ -16,6 +16,12 @@
 </p>
 
 <p>
+  <strong>Published at:</strong>
+  <%= @news_article.published_at %>
+</p>
+
+
+<p>
   <strong>Access:</strong>
   <%= @news_article.access_rights %>
 </p>
@@ -28,10 +34,10 @@
     <strong>Body:</strong>
     <%= @news_article.body %>
   </p>
-<% end %>
-<p>
-  <% if policy(@news_article).edit? %>
-    <%= link_to 'Edit', edit_news_article_path(@news_article) %>
-  <% end %>
-  <%= link_to 'Back', news_articles_path %>
-</p>
+    <% end %>
+    <p>
+      <% if policy(@news_article).edit? %>
+        <%= link_to 'Edit', edit_news_article_path(@news_article) %>
+      <% end %>
+      <%= link_to 'Back', news_articles_path %>
+    </p>

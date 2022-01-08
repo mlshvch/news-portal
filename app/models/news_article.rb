@@ -15,7 +15,7 @@ class NewsArticle < ApplicationRecord
   include AASM
   include NewsArticleMethods
 
-  aasm column: :state, enum: true do
+  aasm timestamps: true, column: :state, enum: true do
     state :not_active, initial: true
     state :active, :published, :archived
 
