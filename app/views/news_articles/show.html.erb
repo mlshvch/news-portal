@@ -30,12 +30,14 @@
         <% end %>
 
         <% if policy(@news_article).approve? %>
-          <% if !@news_article.active? %>
+          <% if @news_article.published? %>
             <%= link_to "Withdraw approve", retract_news_article_path(@news_article), method: :put, class: "btn btn-outline-primary btn-sm btn-block", role: "button" %>
           <% else %>
             <%= link_to "Approve", approve_news_article_path(@news_article), method: :put, class: "btn btn-outline-primary btn-sm btn-block", role: "button" %>
           <% end %>
-        <% elsif policy(@news_article).publish? && !@news_article.published? %>
+        <% end %>
+
+        <% if policy(@news_article).publish? && !@news_article.published? %>
           <%= link_to "Publish", publish_news_article_path(@news_article), method: :put, class: "btn btn-outline-success btn-sm btn-block #{'disabled' if @news_article.published? || !@news_article.active? }", role: "button" %>
         <% end %>
 
