@@ -7,6 +7,7 @@ class NewsArticle < ApplicationRecord
   has_one_attached :main_image, dependent: :destroy
   validates :main_image, presence: true
   has_rich_text :body
+  has_many :comments, dependent: :destroy
   validates :body, presence: true, length: { minimum: 10 }
 
   enum state: %i[not_active active published archived]

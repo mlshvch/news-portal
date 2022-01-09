@@ -3,6 +3,7 @@
 class User < ApplicationRecord
   rolify
   has_many :news_articles
+  has_many :comments, dependent: :destroy
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
