@@ -2,12 +2,8 @@
 
   <%= form.text_field :news_article_id, hidden: true %>
 
-  <div class="field">
-    <%= form.label :body %>
-    <%= form.text_area :body %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
+  <div class="input-group">
+    <%= form.text_area :body, class: "form-control mb-2 mr-sm-2" %>
+    <%= form.submit class: "btn btn-primary mb-2"%>
   </div>
 <% end %>
