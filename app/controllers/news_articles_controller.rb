@@ -59,25 +59,18 @@ class NewsArticlesController < ApplicationController
   end
 
   def approve_news
-    # @news_article.approve
     @news_article.approve!
-    respond_to do |format|
-      format.html { redirect_to response.original_url, notice: 'News article was successfully approved.' }
-    end
+    redirect_to news_article_url
   end
 
   def publish_news
     @news_article.publish!
-    respond_to do |format|
-      format.html { redirect_to response.original_url, notice: 'News article was successfully published.' }
-    end
+    redirect_to news_article_url
   end
 
   def retract_news
     @news_article.not_active!
-    respond_to do |format|
-      format.html { redirect_to response.original_url, notice: 'Retract approval' }
-    end
+    redirect_to news_article_url
   end
 
   private
