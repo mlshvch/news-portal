@@ -1,21 +1,24 @@
 <%= render 'error' %>
 
 <% if policy(@news_articles).index? %>
-<div class="card-deck">
-  <% @news_articles.includes([:main_image_attachment]).each do |news_article| %>
-    <%= link_to news_article do %>
-      <div class="card container" style="margin-top: fill; margin-bottom: 3%; padding: 1%">
-        <%= image_tag news_article.main_image, class: "card-img-top", style: "width: auto; height: 180px; object-fit: cover; object-position center center", alt: news_article.title %>
-        <div class="card-body">
-          <h5 class="card-title"><%= news_article.title %></h5>
-          <p class="card-text"><%= news_article.description %></p>
+
+  <%= link_to "New", new_news_article_url %>
+
+  <div class="card-deck">
+    <% @news_articles.includes([:main_image_attachment]).each do |news_article| %>
+      <%= link_to news_article do %>
+        <div class="card container" style="margin-top: fill; margin-bottom: 3%; padding: 1%">
+          <%= image_tag news_article.main_image, class: "card-img-top", style: "width: auto; height: 180px; object-fit: cover; object-position center center", alt: news_article.title %>
+          <div class="card-body">
+            <h5 class="card-title"><%= news_article.title %></h5>
+            <p class="card-text"><%= news_article.description %></p>
+          </div>
+          <div class="card-footer">
+            <small class="text-muted">Last updated <%= news_article.updated_at %></small>
+          </div>
         </div>
-        <div class="card-footer">
-          <small class="text-muted">Last updated <%= news_article.updated_at %></small>
-        </div>
-      </div>
+      <% end %>
     <% end %>
-  <% end %>
-</div>
+  </div>
 
 <% end %>
