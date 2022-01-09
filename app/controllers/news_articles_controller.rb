@@ -64,7 +64,7 @@ class NewsArticlesController < ApplicationController
   end
 
   def publish_news
-    @news_article.publish!
+    DelayedPublicationJob.set(wait: 3.second).perform_now(@news_article)
     redirect_to news_article_url
   end
 
