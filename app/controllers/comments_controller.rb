@@ -4,7 +4,8 @@ class CommentsController < ActionController::Base
   before_action :set_comment
 
   def create
-    @comment = Comment.new(news_article_params)
+    @news_article = NewsArticle.find(params[:news_article_id])
+    @comment = Comment.new(comment_params)
 
     respond_to do |format|
       if @comment.save
@@ -44,6 +45,6 @@ class CommentsController < ActionController::Base
   def set_comment; end
 
   def comment_params
-    params.require(:comment).permit(:user_id, :news_article_id).merge(user: current_user)
+    params.require(:comment).permit(:body, :news_article_id).merge(user: current_user)
   end
 end

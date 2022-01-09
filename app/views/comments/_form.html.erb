@@ -1,0 +1,13 @@
+<%= form_for([@news_article, @news_article.comments.build]) do |form| %>
+
+  <%= form.text_field :news_article_id, hidden: true %>
+
+  <div class="field">
+    <%= form.label :body %>
+    <%= form.text_area :body %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

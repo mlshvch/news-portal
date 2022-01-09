@@ -63,4 +63,13 @@
       <p class="card-text"><%= @news_article.body %></p>
     <% end %>
   </div>
-</div>
+
+  <div class="card" style="padding: 5%">
+    <h2 class="card-title text-center">Comments</h2>
+    <%= render 'comments/form' %>
+    <%= render 'comments/comment' %>
+  </div>
+
+
+
+  </div>
