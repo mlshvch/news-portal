@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
 class NewsArticlesController < ApplicationController
-  before_action :set_news_article, only: %i[show edit update destroy change_state]
+  before_action :set_news_article, except: %i[index set_news_article news_article_params transition_not_allowed]
   before_action :authenticate_user!, except: :index
+
+  rescue_from AASM::InvalidTransition, with: :transition_not_allowed
 
   # GET /news_articles
   def index
@@ -56,9 +58,26 @@ class NewsArticlesController < ApplicationController
     end
   end
 
-  def change_state
-    authorize @news_article
-    @news_article.change_state(params[:state])
+  def approve_news
+    # @news_article.approve
+    @news_article.approve!
+    respond_to do |format|
+      format.html { redirect_to response.original_url, notice: 'News article was successfully approved.' }
+    end
+  end
+
+  def publish_news
+    @news_article.publish!
+    respond_to do |format|
+      format.html { redirect_to response.original_url, notice: 'News article was successfully published.' }
+    end
+  end
+
+  def retract_news
+    @news_article.not_active!
+    respond_to do |format|
+      format.html { redirect_to response.original_url, notice: 'Retract approval' }
+    end
   end
 
   private
@@ -76,5 +95,10 @@ class NewsArticlesController < ApplicationController
   # Only allow a list of trusted parameters through.
   def news_article_params
     params.require(:news_article).permit(:title, :body, :description, :main_image)
+  end
+
+  def transition_not_allowed
+    flash[:notice] = 'Transition not allowed'
+    redirect_to root_path
   end
 end

@@ -13,5 +13,4 @@ Rails.application.routes.draw do
       put 'retract', to: 'news_articles#retract_news', as: :retract
     end
   end
-
 end
