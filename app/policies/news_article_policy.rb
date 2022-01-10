@@ -6,15 +6,15 @@ class NewsArticlePolicy < ApplicationPolicy
   end
 
   def create?
-    user.present? && user.has_any_role?(:admin, :correspondent, :editor)
+    user.present? && user.has_role?(:correspondent)
   end
 
   def update?
-    create? && ((user.has_role?(:correspondent) && (record.user_id == user.id)) || user.has_any_role?(:editor, :admin))
+    (create? && (record.user_id == user.id)) || user.has_any_role?(:editor, :admin)
   end
 
   def destroy?
-    create? && ((user.has_role?(:correspondent) && (record.user_id == user.id)) || user.has_any_role?(:editor, :admin))
+    update?
   end
 
   private
