@@ -19,7 +19,7 @@ class CommentsController < ActionController::Base
   end
 
   def destroy
-    @comment = Comment.destroy!
+    @comment.destroy
 
     respond_to do |format|
       format.html { redirect_to news_article_url(news_article_id), notice: 'Comment was successfully deleted.' }
