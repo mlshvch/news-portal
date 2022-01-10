@@ -6,10 +6,43 @@
 </p>
 
 <p>
-  <strong>Body:</strong>
-  <%= @news_article.body %>
+  <strong>Created at:</strong>
+  <%= @news_article.created_at %>
 </p>
-<% if policy(@news_article).edit? %>
-<%= link_to 'Edit', edit_news_article_path(@news_article) %>
-<% end %>
-<%= link_to 'Back', news_articles_path %>
+
+<p>
+  <strong>State:</strong>
+  <%= @news_article.state %>
+</p>
+
+<p>
+  <strong>Published at:</strong>
+  <%= @news_article.published_at %>
+</p>
+
+
+<p>
+  <strong>Access:</strong>
+  <%= @news_article.access_rights %>
+</p>
+
+<p>
+  <strong>Important:</strong>
+  <%= @news_article.important %>
+</p>
+
+
+<%= image_tag @news_article.main_image, style: "height: auto; width: 70%" %>
+
+<% unless @news_article.access_rights == 'only_title' %>
+  <p>
+    <strong>Body:</strong>
+    <%= @news_article.body %>
+  </p>
+    <% end %>
+    <p>
+      <% if policy(@news_article).edit? %>
+        <%= link_to 'Edit', edit_news_article_path(@news_article) %>
+      <% end %>
+      <%= link_to 'Back', news_articles_path %>
+    </p>

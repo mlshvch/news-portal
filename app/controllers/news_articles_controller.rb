@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class NewsArticlesController < ApplicationController
-  before_action :set_news_article, only: %i[show edit update destroy]
+  before_action :set_news_article, only: %i[show edit update destroy change_state]
   before_action :authenticate_user!, except: :index
 
   # GET /news_articles
@@ -56,6 +56,11 @@ class NewsArticlesController < ApplicationController
     end
   end
 
+  def change_state
+    authorize @news_article
+    @news_article.change_state(params[:state])
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -70,6 +75,6 @@ class NewsArticlesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def news_article_params
-    params.require(:news_article).permit(:title, :body)
+    params.require(:news_article).permit(:title, :body, :description, :main_image)
   end
 end
