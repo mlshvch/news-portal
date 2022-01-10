@@ -1,0 +1,15 @@
+<% @news_article.comments.includes([:user]).order(created_at: :desc).each do |comment| %>
+  <div class="card" style="margin-bottom: 10px">
+    <div class="card-header">
+      <%= comment.user.email %> at <%= comment.created_at %>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title"><%= comment.body %></h5>
+    </div>
+    <div class="card-footer">
+      <% if comment.user == current_user %>
+      <%= link_to "Delete", method: :delete, data: { confirm: 'Are you sure?' } %>
+      <% end %>
+    </div>
+  </div>
+<% end %>

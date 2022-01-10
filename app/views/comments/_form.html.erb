@@ -1,0 +1,9 @@
+<%= form_for([@news_article, @news_article.comments.build]) do |form| %>
+
+  <%= form.text_field :news_article_id, hidden: true %>
+
+  <div class="input-group">
+    <%= form.text_area :body, class: "form-control mb-2 mr-sm-2" %>
+    <%= form.submit class: "btn btn-primary mb-2"%>
+  </div>
+<% end %>
