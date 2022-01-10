@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   devise_for :users
   root 'news_articles#index'
 
-  resources :users, only: :show
+  resources :users
 
   get 'feeds/rss', to: 'feeds#rss_index', format: 'rss'
 

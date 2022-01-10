@@ -1,8 +1,14 @@
 <div class="card-container">
   <div class="card">
-    <p class="card-title">Email:<%=@user.email %></p>
-    <p class="card-title">Roles:<%=@user.has_role?(:correspondent) %></p>
-    <%= link_to "Update Account", '#' %>
-    <%= link_to "Change password", '#' %>
+
+    <%= image_tag @user.avatar, class: " rounded mx-auto d-block", style: "max-height: 20%; max-width: 20%; margin: 10px%" %>
+
+    <p class="card-title">Email:<%= @user.email %></p>
+    <p class="card-title">Name:<%= @user.name %></p>
+    <p class="card-title">Surname:<%= @user.surname %></p>
+    <p class="card-title">Nickname:<%= @user.nickname %></p>
+
+    <%= link_to "Update Account", edit_user_path(@user) %>
+    <%= link_to "Change password", edit_user_password(@user) %>
   </div>
 </div>
