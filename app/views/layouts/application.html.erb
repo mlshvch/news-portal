@@ -3,7 +3,7 @@
 <head>
   <title>NewsPortal</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-
+  <link href="app/views/feeds/rss_index.builder" rel="alternate" title="RSS feed" type="application/rss+xml">
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
 
@@ -21,7 +21,7 @@
     </form>
     <div>
       <% if user_signed_in? %>
-        <%= link_to 'Account', request.original_url, class: "btn btn-light ", role: "button" %>
+        <%= link_to current_user.email, request.original_url, class: "btn btn-light ", role: "button" %>
         <%= link_to 'Log out', destroy_user_session_path, method: :delete, class: "btn btn-light ", role: "button" %>
       <% else %>
         <%= link_to 'Sign in', new_user_session_url, class: "btn btn-danger text-white ", role: "button" %>
@@ -43,7 +43,17 @@
   </div>
 
 </header>
-
 <%= yield %>
+
+<footer class="bg-light text-lg-start text-center">
+  <% if user_signed_in? %>
+
+    <div class="text-center p-3">
+      <div style="background-color: rgba(0, 0, 0, 0.2);">
+        <%= link_to "RSS", feeds_rss_url, class: "link-light" %>
+      </div>
+    </div>
+  <% end %>
+</footer>
 </body>
 </html>
