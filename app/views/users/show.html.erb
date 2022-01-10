@@ -1,0 +1,8 @@
+<div class="card-container">
+  <div class="card">
+    <p class="card-title">Email:<%=@user.email %></p>
+    <p class="card-title">Roles:<%=@user.has_role?(:correspondent) %></p>
+    <%= link_to "Update Account", '#' %>
+    <%= link_to "Change password", '#' %>
+  </div>
+</div>
