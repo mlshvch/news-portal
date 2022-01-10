@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   after_action :verify_policy_scoped, only: :index
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
-  rescue_from AASM::InvalidTransition, with: transition_not_allowed
+  rescue_from AASM::InvalidTransition, with: :transition_not_allowed
 
   private
 

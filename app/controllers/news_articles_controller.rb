@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class NewsArticlesController < ApplicationController
-  before_action :set_news_article, only: %i[show edit update destroy]
+  before_action :set_news_article, only: %i[show edit update destroy change_state]
   before_action :authenticate_user!, except: :index
 
   # GET /news_articles
@@ -54,6 +54,11 @@ class NewsArticlesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to news_articles_url, notice: 'News article was successfully destroyed.' }
     end
+  end
+
+  def change_state
+    authorize @news_article
+    @news_article.change_state(params[:state])
   end
 
   private
