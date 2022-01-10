@@ -17,6 +17,14 @@ class NewsArticlePolicy < ApplicationPolicy
     update?
   end
 
+  def approve?
+    user.present? && user.has_role?(:editor)
+  end
+
+  def publish?
+    update?
+  end
+
   private
 
   def article
@@ -30,7 +38,16 @@ class NewsArticlePolicy < ApplicationPolicy
     end
 
     def resolve
-      scope.all if user.present?
+      if user.present?
+
+        if user.has_role?(:reader)
+          scope.where(state: :published)
+        else
+          scope.all
+        end
+      else
+        scope.where(access_rights: :avaliable_for_everyone, state: :published)
+      end
     end
 
     private

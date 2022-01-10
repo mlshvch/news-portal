@@ -11,3 +11,10 @@ import "channels"
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
+
+require("trix")
+require("@rails/actiontext")
+
+//= require jquery3
+//= require popper
+//= require bootstrap-sprockets

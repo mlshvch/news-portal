@@ -1,15 +1,75 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Title:</strong>
-  <%= @news_article.title %>
+  <%= link_to 'Back', news_articles_path, class: "btn btn-secondary btn-lg btn-block", role: "button" %>
 </p>
 
-<p>
-  <strong>Body:</strong>
-  <%= @news_article.body %>
-</p>
-<% if policy(@news_article).edit? %>
-<%= link_to 'Edit', edit_news_article_path(@news_article) %>
-<% end %>
-<%= link_to 'Back', news_articles_path %>
+<div class="card-container">
+
+  <div class="card">
+
+    <% if current_user.has_any_role?(:correspondent, :editor) %>
+      <div class="container card" style="padding: 1%">
+        <p>
+          <strong>State:</strong>
+          <%= @news_article.state %>
+        </p>
+
+        <p>
+          <strong>Access:</strong>
+          <%= @news_article.access_rights %>
+        </p>
+
+        <p>
+          <strong>Important:</strong>
+          <%= @news_article.important %>
+        </p>
+
+        <% if policy(@news_article).edit? %>
+          <%= link_to 'Edit', edit_news_article_path(@news_article), class: "btn btn-outline-warning btn-sm btn-block", role: "button" %>
+        <% end %>
+
+        <% if policy(@news_article).approve? %>
+          <% if @news_article.published? %>
+            <%= link_to "Withdraw approve", retract_news_article_path(@news_article), method: :put, class: "btn btn-outline-primary btn-sm btn-block", role: "button" %>
+          <% else %>
+            <%= link_to "Approve", approve_news_article_path(@news_article), method: :put, class: "btn btn-outline-primary btn-sm btn-block", role: "button" %>
+          <% end %>
+        <% end %>
+
+        <% if policy(@news_article).publish? && !@news_article.published? %>
+          <%= link_to "Publish", publish_news_article_path(@news_article), method: :put, class: "btn btn-outline-success btn-sm btn-block #{'disabled' if @news_article.published? || !@news_article.active? }", role: "button" %>
+        <% end %>
+
+      </div>
+
+    <% end %>
+
+
+  </div>
+
+  <div class="card" style="padding: 5%">
+
+    <h2 class="card-title text-center"><%= @news_article.title %></h2>
+
+    <h6 class="card-text text-center"><%= @news_article.description %></h6>
+
+
+    <span><%= @news_article.published_at %></span>
+
+    <%= image_tag @news_article.main_image, class: " rounded mx-auto d-block", style: "max-height: 20%; max-width: 60%; margin: 10px%" %>
+
+    <% unless @news_article.access_rights == 'only_title' %>
+      <p class="card-text"><%= @news_article.body %></p>
+    <% end %>
+  </div>
+
+  <div class="card" style="padding: 5%">
+    <h2 class="card-title text-center">Comments</h2>
+    <%= render 'comments/form'%>
+    <%= render 'comments/comment' %>
+  </div>
+
+
+
+  </div>

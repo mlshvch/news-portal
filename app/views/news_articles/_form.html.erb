@@ -17,8 +17,18 @@
   </div>
 
   <div class="field">
+    <%= form.label "Photo" %>
+    <%= form.file_field :main_image %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div class="field">
     <%= form.label :body %>
-    <%= form.text_area :body %>
+    <%= form.rich_text_area :body %>
   </div>
 
   <div class="actions">

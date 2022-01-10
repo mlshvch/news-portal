@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
 class NewsArticlesController < ApplicationController
-  before_action :set_news_article, only: %i[show edit update destroy]
+  before_action :set_news_article, except: %i[index set_news_article news_article_params transition_not_allowed]
   before_action :authenticate_user!, except: :index
+
+  rescue_from AASM::InvalidTransition, with: :transition_not_allowed
 
   # GET /news_articles
   def index
@@ -56,6 +58,21 @@ class NewsArticlesController < ApplicationController
     end
   end
 
+  def approve_news
+    @news_article.approve!
+    redirect_to news_article_url
+  end
+
+  def publish_news
+    DelayedPublicationJob.set(wait: 3.second).perform_now(@news_article)
+    redirect_to news_article_url
+  end
+
+  def retract_news
+    @news_article.not_active!
+    redirect_to news_article_url
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -70,6 +87,11 @@ class NewsArticlesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def news_article_params
-    params.require(:news_article).permit(:title, :body)
+    params.require(:news_article).permit(:title, :body, :description, :main_image)
+  end
+
+  def transition_not_allowed
+    flash[:notice] = 'Transition not allowed'
+    redirect_to root_path
   end
 end
