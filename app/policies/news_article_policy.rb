@@ -17,6 +17,14 @@ class NewsArticlePolicy < ApplicationPolicy
     create? && ((user.has_role?(:correspondent) && (record.user_id == user.id)) || user.has_any_role?(:editor, :admin))
   end
 
+  def approve?
+    user.present? && user.has_role?(:editor)
+  end
+
+  def publish?
+    update?
+  end
+
   private
 
   def article
