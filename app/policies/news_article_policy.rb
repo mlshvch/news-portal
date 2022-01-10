@@ -30,16 +30,7 @@ class NewsArticlePolicy < ApplicationPolicy
     end
 
     def resolve
-      if user.present?
-
-        if user.has_role?(:reader)
-          scope.where(state: :published)
-        else
-          scope.all
-        end
-      else
-        scope.where(access_rights: :avaliable_for_everyone, state: :published)
-      end
+      scope.all if user.present?
     end
 
     private
