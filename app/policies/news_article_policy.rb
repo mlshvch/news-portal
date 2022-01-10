@@ -17,6 +17,14 @@ class NewsArticlePolicy < ApplicationPolicy
     update?
   end
 
+  def approve?
+    user.present? && user.has_role?(:editor)
+  end
+
+  def publish?
+    update?
+  end
+
   private
 
   def article
